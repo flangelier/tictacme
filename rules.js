@@ -1,21 +1,24 @@
 function start()
 {
 	grid = [-1, -1, -1, -1, -1, -1, -1, -1, -1];
-	winTime = 0;
 	playerTurn= true;
 	first = true;
 	drawGrid();
 	drawTurn(playerTurn);
+	console.log("redraw");
 }
 
 function doMove(x, y)
 {
-	grid[y * 3 + x] = playerTurn;
-	if (playerTurn)
-		drawX(x, y);
-	else
-		drawO(x, y);
-	changeTurn(y * 3 + x);
+	if (grid[y * 3 + x] == -1)
+	{
+		grid[y * 3 + x] = playerTurn;
+		if (playerTurn)
+			drawX(x, y);
+		else
+			drawO(x, y);
+		changeTurn(y * 3 + x);
+	}
 }
 
 function doAI()
@@ -32,7 +35,7 @@ function changeTurn(pos)
 			drawWon(++winTime);
 		else
 		{
-			// SEND FACEBOOK
+			sendFeed(winTime);
 			winTime = 0;
 			drawWon(0);
 		}
@@ -49,7 +52,6 @@ function changeTurn(pos)
 		if (!playerTurn)
 		{
 			var move = doAI();
-			console.log(move);
 			doMove(move%3, Math.floor(move/3));
 		}
 	}
@@ -59,7 +61,6 @@ function checkTicTacToe(player, pos)
 {
 	var column = pos % 3;
 	var row = pos - column;
-	console.log(player,pos);
 	if (grid[row] == player && grid[row+1] == player && grid[row+2] == player)
 		return true;
 	else if (grid[column] == player && grid[column+3] == player && grid[column+6] == player)

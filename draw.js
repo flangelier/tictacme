@@ -20,6 +20,7 @@ function drawGrid()
 
 function drawX(x, y)
 {
+	console.log("draw x");
 	context.moveTo(squareWidth * x, squareHeight * y);
 	context.lineTo(squareWidth * (x + 1), squareHeight * (y + 1));
 	context.stroke();
@@ -31,6 +32,7 @@ function drawX(x, y)
 
 function drawO(x, y)
 {
+	console.log("draw o");
 	context.beginPath();
 	context.arc(squareWidth * (x + 0.5), squareHeight * (y + 0.5), squareHeight / 2,0,2*Math.PI);
 	context.stroke();
