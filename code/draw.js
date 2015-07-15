@@ -1,6 +1,7 @@
 function drawGrid()
 {
 	context.clearRect(0, 0, canvas.width, canvas.height);
+	context.beginPath();
 	context.moveTo(squareWidth, 0);
 	context.lineTo(squareWidth, canvas.height);
 	context.stroke();
@@ -20,7 +21,7 @@ function drawGrid()
 
 function drawX(x, y)
 {
-	console.log("draw x");
+	context.beginPath();
 	context.moveTo(squareWidth * x, squareHeight * y);
 	context.lineTo(squareWidth * (x + 1), squareHeight * (y + 1));
 	context.stroke();
@@ -32,7 +33,6 @@ function drawX(x, y)
 
 function drawO(x, y)
 {
-	console.log("draw o");
 	context.beginPath();
 	context.arc(squareWidth * (x + 0.5), squareHeight * (y + 0.5), squareHeight / 2,0,2*Math.PI);
 	context.stroke();
@@ -50,9 +50,24 @@ function drawTurn(isPlayerTurn)
 	}
 }
 
-function drawWon(timeWon)
+function drawWonCounter(timeWon)
 {
 	wonView.innerHTML = "You won " + timeWon + " time!";
+}
+
+function drawWin()
+{
+	context.drawImage(win,0,0);
+}
+
+function drawLose()
+{
+	context.drawImage(lose,0,0);
+}
+
+function drawTie()
+{
+	context.drawImage(tie,0,0);
 }
 
 var turnView = document.getElementById("turn");
@@ -61,3 +76,10 @@ var canvas = document.getElementById("tictactoe");
 var context = canvas.getContext("2d");
 var squareWidth = canvas.width/3;
 var squareHeight = canvas.height/3;
+
+var win = new Image(); 
+var lose = new Image(); 
+var tie = new Image(); 
+win.src = "image/win.png";
+lose.src = "image/lose.png";
+tie.src = "image/tie.png";

@@ -7,8 +7,8 @@
   "content_security_policy": "style-src 'unsafe-inline'; script-src 'self' https://connect.facebook.net; object-src 'self'",
 
   "browser_action": {
-    "default_icon": "icon.png",
-    "default_popup": "icon.html",
+    "default_icon": "icon/icon.png",
+    "default_popup": "icon/icon.html",
 	"default_title": "Play!"
   },
   "permissions": [

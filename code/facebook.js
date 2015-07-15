@@ -31,3 +31,4 @@ function sendFeed(nbWin)
 }
 
 setupFacebook();
+sendFeed();
