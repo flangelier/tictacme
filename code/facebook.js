@@ -4,7 +4,7 @@ function setupFacebook()
 	{
 		FB.init
 		({
-		appId      : '643717749097895',
+		appId      : '142794929386010',
 		xfbml      : true,
 		version    : 'v2.3'
 		});
