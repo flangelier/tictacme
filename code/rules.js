@@ -1,4 +1,4 @@
-function start()
+function startThatGame()
 {
 	grid = [-1, -1, -1, -1, -1, -1, -1, -1, -1];
 	playerTurn= true;
@@ -9,22 +9,26 @@ function start()
 
 function reset()
 {
-	start();
+	startThatGame();
 	winTime = 0;
 	drawWonCounter(0);
 }
 
 function doMove(x, y)
 {
-	if (grid[y * 3 + x] == -1)
-	{
-		grid[y * 3 + x] = playerTurn;
-		if (playerTurn)
-			drawX(x, y);
-		else
-			drawO(x, y);
-		changeTurn(y * 3 + x);
-	}
+    if (x < 0 || x > 2 || y < 0 || y > 2) {
+        return false;
+    }
+    if (grid[y * 3 + x] == -1) {
+        grid[y * 3 + x] = playerTurn;
+        if (playerTurn)
+            drawX(x, y);
+        else
+            drawO(x, y);
+        changeTurn(y * 3 + x);
+        return true;
+    }
+    return false;
 }
 
 function doAI()
@@ -59,8 +63,13 @@ function changeTurn(pos)
 		drawTurn(playerTurn);
 		if (!playerTurn)
 		{
-			var move = doAI();
-			doMove(move%3, Math.floor(move/3));
+			var moveLegit = false
+			while (!moveLegit) {
+				var move = doAI();
+				var x = move%3
+				var y = Math.floor(move/3)
+				moveLegit = doMove(x, y);
+			}
 		}
 	}
 }
@@ -95,4 +104,4 @@ var winTime = 0;
 var playerTurn = true;
 var first = true;
 
-start();
+startThatGame();
