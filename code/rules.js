@@ -5,7 +5,13 @@ function start()
 	first = true;
 	drawGrid();
 	drawTurn(playerTurn);
-	console.log("redraw");
+}
+
+function reset()
+{
+	start();
+	winTime = 0;
+	drawWonCounter(0);
 }
 
 function doMove(x, y)
@@ -23,7 +29,6 @@ function doMove(x, y)
 
 function doAI()
 {
-	console.log("AI TURNRNRRNRNRNNR");
 	return findMove(grid);
 }
 
@@ -32,18 +37,21 @@ function changeTurn(pos)
 	if (checkTicTacToe(playerTurn, pos))
 	{
 		if (playerTurn)
-			drawWon(++winTime);
+		{
+			drawWonCounter(++winTime);
+			drawWin();
+			setTimeout(function(){ start(); }, 2000);
+		}
 		else
 		{
+			drawLose();
 			sendFeed(winTime);
-			winTime = 0;
-			drawWon(0);
 		}
-		start();
 	}
 	else if (checkTie())
 	{
-		start();
+		drawTie();
+		setTimeout(function(){ start(); }, 2000);
 	}
 	else
 	{
@@ -76,11 +84,12 @@ function checkTicTacToe(player, pos)
 function checkTie()
 {
 	for (var i in grid)
-		if (i == -1)
-			return true;
-	return false;
+		if (grid[i] == -1)
+			return false;
+	return true;
 }
 
+document.getElementById("reset").onclick=reset;
 var grid = [-1, -1, -1, -1, -1, -1, -1, -1, -1];
 var winTime = 0;
 var playerTurn = true;
