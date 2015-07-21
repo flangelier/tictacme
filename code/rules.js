@@ -1,4 +1,4 @@
-function startThatGame()
+function startNewGame()
 {
 	grid = [-1, -1, -1, -1, -1, -1, -1, -1, -1];
 	playerTurn= true;
@@ -9,7 +9,7 @@ function startThatGame()
 
 function reset()
 {
-	startThatGame();
+	startNewGame();
 	winTime = 0;
 	drawWonCounter(0);
 }
@@ -44,7 +44,7 @@ function changeTurn(pos)
 		{
 			drawWonCounter(++winTime);
 			drawWin();
-			setTimeout(function(){ start(); }, 2000);
+			setTimeout(function(){ startNewGame(); }, 2000);
 		}
 		else
 		{
@@ -55,7 +55,7 @@ function changeTurn(pos)
 	else if (checkTie())
 	{
 		drawTie();
-		setTimeout(function(){ start(); }, 2000);
+		setTimeout(function(){ startNewGame(); }, 2000);
 	}
 	else
 	{
@@ -104,4 +104,4 @@ var winTime = 0;
 var playerTurn = true;
 var first = true;
 
-startThatGame();
+startNewGame();
