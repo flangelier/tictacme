@@ -1,16 +1,20 @@
 function startNewGame()
 {
+	nbGame++;
 	grid = [-1, -1, -1, -1, -1, -1, -1, -1, -1];
-	playerTurn= true;
-	first = true;
+	playerTurn = nbGame % 2;
+	firstIsX = true;
+	
 	drawGrid();
 	drawTurn(playerTurn);
+	tryAndDoAI();
 }
 
 function reset()
 {
 	startNewGame();
 	winTime = 0;
+	nbGame = 0;
 	drawWonCounter(0);
 }
 
@@ -21,20 +25,27 @@ function doMove(x, y)
     }
     if (grid[y * 3 + x] == -1) {
         grid[y * 3 + x] = playerTurn;
-        if (playerTurn)
+        if (firstIsX)
             drawX(x, y);
         else
             drawO(x, y);
+		firstIsX = !firstIsX;
         changeTurn(y * 3 + x);
         return true;
     }
     return false;
 }
 
-function doAI()
+function tryAndDoAI()
 {
-    var depth = countEmptyCases();
-	return minimaxRoot(depth);
+	if (!playerTurn)
+	{
+		var depth = countEmptyCases();
+		var move = minimaxRoot(depth);
+		var x = move%3;
+		var y = Math.floor(move/3);
+		doMove(x, y);
+	}
 }
 
 function countEmptyCases()
@@ -75,13 +86,7 @@ function changeTurn(pos)
 	{
 		playerTurn = !playerTurn;
 		drawTurn(playerTurn);
-		if (!playerTurn)
-		{
-            var move = doAI();
-            var x = move%3;
-            var y = Math.floor(move/3);
-            doMove(x, y);
-		}
+		tryAndDoAI();
 	}
 }
 
@@ -129,6 +134,7 @@ function checkTie()
 
 document.getElementById("reset").onclick=reset;
 var grid = [-1, -1, -1, -1, -1, -1, -1, -1, -1];
+var nbGame = 0;
 var winTime = 0;
 var playerTurn = true;
 var first = true;
