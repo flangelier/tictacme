@@ -1,20 +1,20 @@
 QUnit.module( "AI tests" );
 QUnit.test( "AI tests", function( assert ) {
     reset();
-    assert.equal(grid[0], -1, "Passed")
-    assert.equal(grid[1], -1, "Passed")
-    assert.equal(grid[2], -1, "Passed")
-    assert.equal(grid[3], -1, "Passed")
-    assert.equal(grid[4], -1, "Passed")
-    assert.equal(grid[5], -1, "Passed")
-    assert.equal(grid[6], -1, "Passed")
-    assert.equal(grid[7], -1, "Passed")
-    assert.equal(grid[8], -1, "Passed")
-    assert.equal(findMove(grid), 0, "Passed")
+    assert.equal(grid[0], -1, "Grid0 = -1");
+    assert.equal(grid[1], -1, "Grid1 = -1");
+    assert.equal(grid[2], -1, "Grid2 = -1");
+    assert.equal(grid[3], -1, "Grid3 = -1");
+    assert.equal(grid[4], -1, "Grid4 = -1");
+    assert.equal(grid[5], -1, "Grid5 = -1");
+    assert.equal(grid[6], -1, "Grid6 = -1");
+    assert.equal(grid[7], -1, "Grid7 = -1");
+    assert.equal(grid[8], -1, "Grid8 = -1");
+    assert.equal(findMove(grid), 0, "Find move 0 after reset");
     doMove(0,0);
-    assert.equal(findMove(grid), 2, "Passed")
+    assert.equal(findMove(grid), 2, "Find move 2 after doMove0,0");
     doMove(0,2);
-    assert.equal(findMove(grid), 3, "Passed")
+    assert.equal(findMove(grid), 3, "Find move 3 after doMove0,0 and doMove0,2");
     doMove(2,2);
-    assert.equal(findMove(grid), 4, "Passed")
+    assert.equal(findMove(grid), 4, "Find move 4 after doMove0,0 doMove0,2 and doMove2,2");
 });
