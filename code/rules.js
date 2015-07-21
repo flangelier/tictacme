@@ -33,12 +33,26 @@ function doMove(x, y)
 
 function doAI()
 {
-	return findMove(grid);
+    var depth = countEmptyCases();
+	return minimaxRoot(depth);
+}
+
+function countEmptyCases()
+{
+    var count = 0;
+
+    for(var i = 0; i < grid.length ; i++) {
+        if (grid[i] == -1) {
+            count++;
+        }
+    }
+
+    return count;
 }
 
 function changeTurn(pos)
 {
-	if (checkTicTacToe(playerTurn, pos))
+	if (checkTicTacToeForMove(playerTurn, pos))
 	{
 		if (playerTurn)
 		{
@@ -63,18 +77,15 @@ function changeTurn(pos)
 		drawTurn(playerTurn);
 		if (!playerTurn)
 		{
-			var moveLegit = false
-			while (!moveLegit) {
-				var move = doAI();
-				var x = move%3
-				var y = Math.floor(move/3)
-				moveLegit = doMove(x, y);
-			}
+            var move = doAI();
+            var x = move%3;
+            var y = Math.floor(move/3);
+            doMove(x, y);
 		}
 	}
 }
 
-function checkTicTacToe(player, pos)
+function checkTicTacToeForMove(player, pos)
 {
 	var column = pos % 3;
 	var row = pos - column;
@@ -88,6 +99,24 @@ function checkTicTacToe(player, pos)
 		return true;
 	else
 		return false;
+}
+
+function checkTicTacToe()
+{
+	for(var player = 0 ; player < 2 ; player++) {
+		for(var position = 0 ; position < 9 ; position++) {
+			if(checkTicTacToeForMove(player, position))
+				return true;
+		}
+	}
+}
+
+function checkTicTacToeForPlayer(player)
+{
+	for(var position = 0 ; position < 9 ; position++) {
+		if(checkTicTacToeForMove(player, position))
+			return true;
+	}
 }
 
 function checkTie()
