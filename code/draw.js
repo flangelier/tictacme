@@ -57,17 +57,17 @@ function drawWonCounter(timeWon)
 
 function drawWin()
 {
-	context.drawImage(win,0,0);
+	context.drawImage(win,0,0, win.width, win.height);
 }
 
 function drawLose()
 {
-	context.drawImage(lose,0,0);
+	context.drawImage(lose,0,0, lose.width, lose.height);
 }
 
 function drawTie()
 {
-	context.drawImage(tie,0,0);
+	context.drawImage(tie,0,0, tie.width, tie.height);
 }
 
 var turnView = document.getElementById("turn");
@@ -77,9 +77,19 @@ var context = canvas.getContext("2d");
 var squareWidth = canvas.width/3;
 var squareHeight = canvas.height/3;
 
-var win = new Image(); 
-var lose = new Image(); 
-var tie = new Image(); 
+//setup the images
+var win = new Image();
+var lose = new Image();
+var tie = new Image();
+
 win.src = "image/win.png";
+win.width = canvas.width;
+win.height = canvas.height;
+
 lose.src = "image/lose.png";
+lose.width = canvas.width;
+lose.height = canvas.height;
+
 tie.src = "image/tie.png";
+tie.width = canvas.width;
+tie.height = canvas.height;
