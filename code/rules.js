@@ -40,10 +40,16 @@ function tryAndDoAI()
 {
 	if (!playerTurn)
 	{
-		var depth = countEmptyCases();
-		var move = minimaxRoot(depth);
-		var x = move%3;
-		var y = Math.floor(move/3);
+		var emptyCases = countEmptyCases();
+        var depth = Math.floor(Math.random() * (difficulty - 1)) + 1;
+
+        if(depth > emptyCases)
+            depth = emptyCases;
+
+        var move = minimaxRoot(depth);
+        var x = move%3;
+        var y = Math.floor(move/3);
+
 		doMove(x, y);
 	}
 }
@@ -69,6 +75,11 @@ function changeTurn(pos)
 		{
 			drawWonCounter(++winTime);
 			drawWin();
+
+            if(winTime%3 == 0 && difficulty < 9)
+                difficulty++;
+
+
 			setTimeout(function(){ startNewGame(); }, 2000);
 		}
 		else
@@ -138,5 +149,6 @@ var nbGame = 0;
 var winTime = 0;
 var playerTurn = true;
 var first = true;
+var difficulty = 1;
 
 startNewGame();
