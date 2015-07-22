@@ -1,1 +1,1 @@
-window.open("../tictactoe.html");
+window.open("../index.html");
