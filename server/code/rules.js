@@ -73,6 +73,7 @@ function changeTurn(pos)
 	{
 		if (playerTurn)
 		{
+			playerTurn = !playerTurn;
 			drawWonCounter(++winTime);
 			drawWin();
 
