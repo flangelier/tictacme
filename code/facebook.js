@@ -25,10 +25,12 @@ function sendFeed(nbWin)
 	FB.ui
 	({
 		method: 'feed',
-		link: 'https://developers.facebook.com/docs/',
+		link: 'http://www.ensor-soleil.com',
+		name: 'Tic Tac Me',
 		caption: 'I won ' + nbWin + ' game! BEAT THAT!',
+		picture: 'https://upload.wikimedia.org/wikipedia/commons/8/89/Jogo_da_velha_-_tic_tac_toe.png',
 	}, function(response){});
 }
 
 setupFacebook();
-sendFeed();
+//sendFeed();
